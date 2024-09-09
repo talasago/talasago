@@ -18,4 +18,4 @@ jobs:
         with:
           USERNAME: ${{ github.repository_owner }}
           UTC_OFFSET: 9
-          EXCLUDE: "TeX,HTML,CSS"
+          EXCLUDE: "[TeX,HTML,CSS]"
