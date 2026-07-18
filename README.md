@@ -1,3 +1,3 @@
-![](https://github-profile-summary-cards.vercel.app/api/cards/profile-details?username=talasago&theme=nord_dark)
-![](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=talasago&exclude=TeX,HTML,CSS,C%2B%2B&theme=nord_dark) ![](https://github-profile-summary-cards.vercel.app/api/cards/most-commit-language?username=talasago&exclude=TeX,HTML,CSS,C%2B%2B&theme=nord_dark)
-![](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=talasago&utcOffset=9&theme=nord_dark)
+![](./profile-summary-card-output/nord_dark/0-profile-details.svg)
+![](./profile-summary-card-output/nord_dark/1-repos-per-language.svg) ![](./profile-summary-card-output/nord_dark/2-most-commit-language.svg)
+![](./profile-summary-card-output/nord_dark/4-productive-time.svg)
