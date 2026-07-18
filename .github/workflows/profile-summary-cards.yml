@@ -13,13 +13,29 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
-      - uses: vn7n24fzkq/github-profile-summary-cards@release
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          # Dedicated fine-grained PAT scoped only to this repo
+          # (Contents: read and write), used solely so the generated cards
+          # can be pushed as this account. main is protected by a ruleset
+          # whose bypass list only exempts the repository admin, not the
+          # github-actions bot that the default GITHUB_TOKEN pushes as.
+          # Kept separate from SUMMARY_GITHUB_TOKEN below, which exists only
+          # to read private commit data and should not also carry push
+          # authority.
+          token: ${{ secrets.CARD_PUSH_TOKEN }}
+      # release is a rolling deploy branch (bundled dist, no dist/ in tagged
+      # source versions), so it's pinned by commit instead of a vX.Y.Z tag.
+      # 89776cd is the tip of `release` as of 2026-07-17, built from main
+      # just after the v0.11.6 tag (main had one more untagged commit).
+      - uses: vn7n24fzkq/github-profile-summary-cards@89776cd44fb40c4f7b3e5c2db993728cd700d638
         env:
           # Requires a PAT with the `repo` scope (classic) or read access to
           # private repositories (fine-grained), stored as the
-          # SUMMARY_GITHUB_TOKEN repo secret. The account must also have
-          # "Include private contributions on my profile" enabled at
+          # SUMMARY_GITHUB_TOKEN repo secret. Read-only is enough; this
+          # token is only used to fetch private commit/contribution data,
+          # not to push. The account must also have "Include private
+          # contributions on my profile" enabled at
           # https://github.com/settings/profile, otherwise private commits
           # are still excluded even with a valid token.
           GITHUB_TOKEN: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
