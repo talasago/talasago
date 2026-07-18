@@ -14,6 +14,12 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Use the same PAT as below (not the default GITHUB_TOKEN) so the
+          # generated cards are pushed as this account. main is protected by
+          # a ruleset whose bypass list only exempts the repository admin,
+          # not the github-actions bot that the default token pushes as.
+          token: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
       - uses: vn7n24fzkq/github-profile-summary-cards@89776cd44fb40c4f7b3e5c2db993728cd700d638 # release
         env:
           # Requires a PAT with the `repo` scope (classic) or read access to
