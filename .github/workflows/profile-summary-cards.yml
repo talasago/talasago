@@ -1,0 +1,30 @@
+name: GitHub-Profile-Summary-Cards
+
+on:
+  schedule:
+    - cron: "0 0 * * *" # once a day
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: generate-github-cards
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: vn7n24fzkq/github-profile-summary-cards@release
+        env:
+          # Requires a PAT with the `repo` scope (classic) or read access to
+          # private repositories (fine-grained), stored as the
+          # SUMMARY_GITHUB_TOKEN repo secret. The account must also have
+          # "Include private contributions on my profile" enabled at
+          # https://github.com/settings/profile, otherwise private commits
+          # are still excluded even with a valid token.
+          GITHUB_TOKEN: ${{ secrets.SUMMARY_GITHUB_TOKEN }}
+        with:
+          USERNAME: talasago
+          THEME: nord_dark
+          EXCLUDE: TeX,HTML,CSS,C++
+          UTC_OFFSET: 9
